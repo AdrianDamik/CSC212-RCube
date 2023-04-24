@@ -1,10 +1,10 @@
-﻿// Copyright 2023
-// Adrian Damik, Elijah Gray, & Aryan Pothanaboyina
+﻿// Created by Megalomatt (https://github.com/Megalomatt/unity-rcube) (2020)
+// Revised by hamzazmah (https://github.com/hamzazmah/RubiksCubeUnity-Tutorial) (2020)
 
 using System;
 using System.IO;
-using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 namespace Kociemba
 {
@@ -93,7 +93,7 @@ namespace Kociemba
 
         public static short[,] DeserializeTable(string filename)
         {
-            
+
             TextAsset asset = Resources.Load(filename) as TextAsset;
             Stream s = new MemoryStream(asset.bytes);
             //Stream s = File.Open("Assets\\Resources\\" + filename, FileMode.Open);
@@ -136,5 +136,5 @@ namespace Kociemba
                 Directory.CreateDirectory(directoryName);
             }
         }
-    }    
+    }
 }

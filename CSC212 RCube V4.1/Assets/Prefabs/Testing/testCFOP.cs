@@ -1,5 +1,5 @@
-// Copyright 2023
-// Adrian Damik, Elijah Gray, & Aryan Pothanaboyina
+// COPYRIGHT 2023 ELIJAH GRAY, FEEL FREE TO REUSE! :)
+// Revised by Adrian Damik (2023)
 
 using CubeXdotNET;
 using Kociemba;
@@ -12,19 +12,29 @@ using UnityEngine.Assertions;
 using seedHash = System.Collections.Generic.Queue<System.Tuple<string, int>>; // adrian 4/4/23
 
 
-// test base created by Elijah Gray
+/// <summary>
+/// blackbox test base & data collection system created by Elijah Gray. - Elijah Gray
+/// revised by Adrian for use with seed generator - Adrian
+/// this test is for the CFOP method.
+/// </summary>
 public class testCFOP : MonoBehaviour
 {
+    /// <summary>
+    /// used to grab the cube state functionality.
+    /// </summary>
     private CubeState cubeState;
+
     private ReadCube readCube;
+
+    /// <summary>
+    /// the solver used in this test, in this case the CFOP method.
+    /// </summary>
     private CFOPSolver solver;
 
-    seedHash seedQueueCFOP = new seedHash(); // adrian 4/4/23
-
-    //SolveTwoPhase Method_Solver;
-
-    //GameObject.find("PivotRotation");
-    
+    /// <summary>
+    /// 
+    /// </summary>
+    seedHash seedQueueCFOP = new seedHash(); // adrian 4/4/23 
 
     // list of moves, copypasted from the Kociemba solver file. - Elijah Gray
     private readonly List<string> allMoves = new List<string>()

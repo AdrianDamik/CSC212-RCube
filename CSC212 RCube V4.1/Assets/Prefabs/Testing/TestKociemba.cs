@@ -1,5 +1,5 @@
-// Copyright 2023
-// Adrian Damik, Elijah Gray, & Aryan Pothanaboyina
+// COPYRIGHT 2023 ELIJAH GRAY, FEEL FREE TO REUSE! :)
+// Revised by Adrian Damik (2023)
 
 using CubeXdotNET;
 using Kociemba;

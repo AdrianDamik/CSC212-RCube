@@ -1,5 +1,4 @@
-﻿// Copyright 2023
-// Adrian Damik, Elijah Gray, & Aryan Pothanaboyina
+﻿// Created by Uzi Granot (https://www.codeproject.com/Articles/1199528/Rubik-s-Cube-for-Beginners-Version-2-0-Csharp-Appl) (2022)
 
 /////////////////////////////////////////////////////////////////////
 //

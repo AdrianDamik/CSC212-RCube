@@ -1,59 +1,75 @@
-﻿// Copyright 2023
-// Adrian Damik, Elijah Gray, & Aryan Pothanaboyina
+﻿// Created by Megalomatt (https://github.com/Megalomatt/unity-rcube) (2020)
+// Revised by hamzazmah (https://github.com/hamzazmah/RubiksCubeUnity-Tutorial) (2020)
+// Revised by Elijah Gray & Adrian Damik (2023)
 
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-// part of the original developer's code, the main part of automates update loop is unmodified.
-// turned into main driver function of the program
-// Updates every frame to manage the rubiks cube's functionality, determining if it should be rotating
-// or not.
-// - Elijah Gray
-
+/// <summary>
+///  Originally created by the original developers & modified by Elijah & Adrian. Manages the majority of the program and instructs the program to execute movement commands 
+///  and help determine whether the program should be moving. Additionaly it helps track the steps used in a solution used in Adrian's interface. - Elijah Gray
+/// </summary>
 public class Automate : MonoBehaviour
 {
+
+    /// <summary>
+    ///  A list of strings to hold all the moves used by the automate object. 
+    /// </summary>
     public static List<string> moveList = new List<string>();
 
-    private readonly List<string> allMoves = new List<string>() 
+    /// <summary>
+    /// Copypasted from the original creator of the visualizer. A list of all possible rubiks cube moves in rubik's cube notation. -Elijah Gray
+    /// </summary>
+    private readonly List<string> allMoves = new List<string>()
     {
         "U", "D", "L", "R", "F", "B",
         "U2", "D2", "L2", "R2", "F2", "B2",
         "U'", "D'", "L'", "R'", "F'", "B'"
     }; // a list of all possible moves utilizable by this visualizer in rubiks cube notation.
 
+
+    /// <summary>
+    ///  used to grab the function to get the cubestate functionality.
+    /// </summary>
     private CubeState cubeState;
+
+    /// <summary>
+    ///  used to grab the function to get the readcube functionality.
+    /// </summary>
     private ReadCube readCube;
+
+
+    /// <summary>
+    ///  an array to hold all the pivots in the scene. 
+    /// </summary>
     public static PivotRotation[] pivot_array; //= GameObject.FindObjectsOfType(PivotRotation);
 
-    Automate()
-    {
-        Debug.Log("Automate object created");
-    }
 
+    /// <summary>
+    /// the number of shuffles in the user interface specified by the user.
+    /// </summary>
     public InputField inShuffleSize;
+
+    /// <summary>
+    ///  an error message for the interface
+    /// </summary>
     public Text txtErrorMessage;
 
-    public int targetFrameRate = 120; // desired framerate. 
-
-    // Goes through a list of pivot game objects in the unity to see if any are currently autorotating
-    // this is checked by seeing if their autorotate boolean value is true.
-    // if any of the pivots are autorotating then the function will return true, otherwise it will return false.
-    // - Elijah Gray
+    /// <summary>
+    /// Traverses through the list of Pivot objects in the scene and checks if any of them are active by checking their magnitude & autorotating boolean. This however is redundant and could be removed.
+    /// -Elijah Gray
+    /// </summary>
+    /// <returns> Returns a boolean, true if any pivots in the scene are active, false if no pivots are active. </returns>
     public static bool CheckForMovement()
     {
 
-        if(pivot_array == null)
+        if (pivot_array == null)
         {
             return false;
         }
 
-
-        for(int i = 0; i < pivot_array.Length; i++ )
+        for (int i = 0; i < pivot_array.Length; i++)
         {
             if (pivot_array[i].autoRotating || pivot_array[i].rotation.magnitude > 0)
             {
@@ -64,57 +80,32 @@ public class Automate : MonoBehaviour
         return false;
     }
 
-    // a debug function that was used to count how many pivot points were active at a given time in the rubiks cube simulation
-    // -Elijah Gray
-    // returns number of pivots whose auto-rotation boolean is true.
-    /*
-    public int Number_of_active_Pivots()
-    {
 
-        if (pivot_array == null)
-        {
-            return 0;
-        }
-
-        int number = 0;
-        for (int i = 0; i < pivot_array.Length; i++)
-        {
-            if (pivot_array[i].autoRotating)
-            {
-                ++number;
-            }
-        }
-
-        return number;
-    }
-    */
-
-
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    ///  called at the beginning of the program startup to initialize the variables by finding the other objects in the unity scene. Additionaly, sets the framerate cap of the program 
+    ///  as when the framerate is too high the program can break, this is an issue for futurework to solve. -Elijah Gray
+    /// </summary>
+    private void Start()
     {
         cubeState = FindObjectOfType<CubeState>();
         readCube = FindObjectOfType<ReadCube>();
         pivot_array = GameObject.FindObjectsOfType<PivotRotation>();
-        //manager = FindFirstObjectByType<CubeEventManager>();
 
         QualitySettings.vSyncCount = 1;
         Application.targetFrameRate = 120;
     }
 
-    // Update is called once per frame
-    // written by original developer/tutorial creator
-    // determines if cube should execute a move every frame
-    // if the Cubestate.started condition is true, it can begin.
-    // if the movelist is 0 no action will be taken.
-    // if the rubiks cube is already rotating it will take no action.
-    // - Elijah Gray
-    void Update()
+ 
+    /// <summary>
+    ///  Updates every frame in the program. Slightly modified function of the original creator(s). When the program isn't moving a cube already it will tell it to execute one move
+    ///  in the automate.movelist variable then remoeve said move from the list in order. If the cube is mid-animation, it will skip this. - Elijah Gray
+    /// </summary>
+    private void Update()
     {
         if (CheckForMovement()) return; // prevents the program from scheduling another move while the cube already has a movement happening.
         // - Elijah Gray
 
-        if(moveList.Count > 0 && !CubeState.autoRotating && CubeState.started)
+        if (moveList.Count > 0 && !CubeState.autoRotating && CubeState.started)
         {
             CubeState.autoRotating = true;
             Debug.Log("automate() going to next step");
@@ -125,17 +116,22 @@ public class Automate : MonoBehaviour
         }
     }
 
-    // created by original developer/tutorial creator.
-    // updates the list of strings movelist to have a series of moves that will be executed to shuffle the rubiks cube.
-    // - Elijah Gray
+
+    /// <summary>
+    /// Slightly modified function. Executes a random number of moves specified by the user interface to shuffle the cube. Sends a list to the automate.movelist to shuffle the cube.
+    /// </summary>
     public void Shuffle()
     {
 
-        AddedCounter.instance.ResetSteps();              // Added 2/28/23
+        if (AddedCounter.instance) // added after to prevent it from resetting if it isn't initialized - Elijah
+        {
+            AddedCounter.instance.ResetSteps();              // Added 2/28/23
+        }
+
 
         int shuffleLen = 0;
         int.TryParse(inShuffleSize.text, out shuffleLen);
-        if(shuffleLen < 1)
+        if (shuffleLen < 1)
         {
             txtErrorMessage.text = "Error: Input Valid Data";
             //shuffleLength = UnityEngine.Random.Range(10, 30);
@@ -154,23 +150,18 @@ public class Automate : MonoBehaviour
             moveList = moves;
             txtErrorMessage.text = "";
         }
-        
+
     }
 
-    // takes in a string representing a rubiks cube move in rubiks cube notation. Performs a full rotation on a cube as requested in the visualizer.
-    // - Elijah Gray
+
+
+    /// <summary>
+    /// Created by the original developer and modified by Elijah and Adrian. Given a move in Rubik's cube notation, the program will execute that animation. - Elijah Gray
+    /// </summary>
+    /// <param name="move">the move to be executed by the program in Rubik's cube notation IE U, U' or U2</param>
     public void DoMove(string move)
     {
-        
-        Debug.Log("MOVE EXECUTED: " + move);
-  
-        if(CheckForMovement())
-        {
-            Debug.Log("executing move while cube is already moving!");
-        }
 
-
-        //doing_something = true;
         readCube.ReadState();
 
         // turned the sequence of if statements into a switch statement to improve performance.
@@ -179,172 +170,81 @@ public class Automate : MonoBehaviour
         switch (move)
         {
             case "U":
-                RotateSide(cubeState.up, -90);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.up, -90);               
                 break;
             case "U'":
-                RotateSide(cubeState.up, 90);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.up, 90);              
                 break;
             case "U2":
-                RotateSide(cubeState.up, -180);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.up, -180);               
                 break;
             case "D":
-                RotateSide(cubeState.down, -90);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.down, -90);               
                 break;
             case "D'":
-                RotateSide(cubeState.down, 90);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.down, 90);              
                 break;
             case "D2":
-                RotateSide(cubeState.down, -180);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.down, -180);               
                 break;
             case "L":
-                RotateSide(cubeState.left, -90);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.left, -90);               
                 break;
             case "L'":
-                RotateSide(cubeState.left, 90);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.left, 90);                
                 break;
             case "L2":
-                RotateSide(cubeState.left, -180);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.left, -180);               
                 break;
             case "R":
-                RotateSide(cubeState.right, -90);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.right, -90);               
                 break;
             case "R'":
-                RotateSide(cubeState.right, 90);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.right, 90);               
                 break;
             case "R2":
-                RotateSide(cubeState.right, -180);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.right, -180);               
                 break;
             case "F":
-                RotateSide(cubeState.front, -90);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.front, -90);                
                 break;
             case "F'":
-                RotateSide(cubeState.front, 90);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.front, 90);                
                 break;
             case "F2":
                 RotateSide(cubeState.front, -180);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
                 break;
             case "B":
-                RotateSide(cubeState.back, -90);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
+                RotateSide(cubeState.back, -90);               
                 break;
             case "B'":
                 RotateSide(cubeState.back, 90);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
                 break;
             case "B2":
                 RotateSide(cubeState.back, -180);
-                AddedCounter.instance.AddStep();                // Added 2/28/23
                 break;
             default:
                 Debug.Log("invalid move encountered!");
-                break;
+                return;
         }
 
+        AddedCounter.instance.AddStep();                // Added 2/28/23 by Adrian, moved down here so it doesn't meed to be in every case, -Elijah Gray
 
-
-        /*
-        if(move == "U" )
-        {
-            RotateSide(cubeState.up, -90);
-        }
-        if (move == "U'")
-        {
-            RotateSide(cubeState.up, 90);
-        }
-        if (move == "U2")
-        {
-            RotateSide(cubeState.up, -180);
-        }
-        if (move == "D")
-        {
-            RotateSide(cubeState.down, -90);
-        }
-        if (move == "D'")
-        {
-            RotateSide(cubeState.down, 90);
-        }
-        if (move == "D2")
-        {
-            RotateSide(cubeState.down, -180);
-        }
-        if (move == "L")
-        {
-            RotateSide(cubeState.left, -90);
-        }
-        if (move == "L'")
-        {
-            RotateSide(cubeState.left, 90);
-        }
-        if (move == "L2")
-        {
-            RotateSide(cubeState.left, -180);
-        }
-        if (move == "R")
-        {
-            RotateSide(cubeState.right, -90);
-        }
-        if (move == "R'")
-        {
-            RotateSide(cubeState.right, 90);
-        }
-        if (move == "R2")
-        {
-            RotateSide(cubeState.right, -180);
-        }
-        if (move == "F")
-        {
-            RotateSide(cubeState.front, -90);
-        }
-        if (move == "F'")
-        {
-            RotateSide(cubeState.front, 90);
-        }
-        if (move == "F2")
-        {
-            RotateSide(cubeState.front, -180);
-        }
-        if (move == "B")
-        {
-            RotateSide(cubeState.back, -90);
-        }
-        if (move == "B'")
-        {
-            RotateSide(cubeState.back, 90);
-        }
-        if (move == "B2")
-        {
-            RotateSide(cubeState.back, -180);
-        }
-        */
-
-        //doing_something = false;
 
     }
-    
-    //instantiates a pivot point and begins the rubiks cube rotation process when given the side of a rubiks cube from the list of possible sides
-    // and given an angle the turn should be.
-    // - Elijah Gray
-    void RotateSide(List<GameObject> side, float angle)
+
+
+    /// <summary>
+    ///  Unmodified function from the original developer. Used to execute a movements. - Elijah Gray
+    /// </summary>
+    /// <param name="side"> the side of the rubiks cube that should be rotated </param>
+    /// <param name="angle"> the angle the cube side should be rotated, IE -90, 90, 180 </param>
+    public void RotateSide(List<GameObject> side, float angle)
     {
         PivotRotation pr = side[4].transform.parent.GetComponent<PivotRotation>();
         pr.StartAutoRotate(side, angle);
     }
 
- 
+
 
 }

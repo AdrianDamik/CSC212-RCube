@@ -1,5 +1,5 @@
 // Copyright 2023
-// Adrian Damik, Elijah Gray, & Aryan Pothanaboyina
+// Created by Adrian Damik
 
 using System.Collections;
 using System.Collections.Generic;
@@ -7,16 +7,32 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages the speed control features for the simulator.
+/// </summary>
 public class AddedTimeControl : MonoBehaviour
 {
     [SerializeField] Slider mySlider;
     [SerializeField] Text myText;
 
+    /// <summary>
+    /// Text box to display current debug speed state.
+    /// </summary>
     public Text debugText;
 
+    /// <summary>
+    /// Used to keep track whether or not the simulator is paused.
+    /// </summary>
     bool isPaused = false;
+
+    /// <summary>
+    /// Used to keep track whether or not the debug speed is enabled.
+    /// </summary>
     bool isDebugEnabled = false;
 
+    /// <summary>
+    /// Updates the text box above the speed slider to display the current speed, and checks to see whether or not the debug function is enabled for another text display.
+    /// </summary>
     void Update() 
     {
         // sets text value above slider to slider value
@@ -29,6 +45,9 @@ public class AddedTimeControl : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adjusts the time scale of the simulation to match the current value of the slider.
+    /// </summary>
     public void changeSpeed() 
     {
         // changes time based on slider value
@@ -38,6 +57,9 @@ public class AddedTimeControl : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pauses the simulation if the UI pause button is pressed. If pause is currently enabled, pressing the button again will unpause the simulator.
+    /// </summary>
     public void Pause() 
     {
         // if pause is false, set time to 0 & change pause to true
@@ -56,6 +78,9 @@ public class AddedTimeControl : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Enables the debug speed if the UI debug button is pressed. If debug speed is currently enabled, pressing the button again will disable the debug speed.
+    /// </summary>
     public void Debug()
     {
         // if debug is false & pause is false, set time to 100 & change debug to true

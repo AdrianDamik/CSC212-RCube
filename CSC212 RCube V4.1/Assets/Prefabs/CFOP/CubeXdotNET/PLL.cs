@@ -1,5 +1,4 @@
-﻿// Copyright 2023
-// Adrian Damik, Elijah Gray, & Aryan Pothanaboyina
+﻿// Created by divinsmathew (https://github.com/divinsmathew/CubeXdotNet-Rubiks-Cube-Solver) (2021)
 
 using System;
 

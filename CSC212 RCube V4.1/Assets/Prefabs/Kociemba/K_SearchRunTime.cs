@@ -1,5 +1,5 @@
-﻿// Copyright 2023
-// Adrian Damik, Elijah Gray, & Aryan Pothanaboyina
+﻿// Created by Megalomatt (https://github.com/Megalomatt/unity-rcube) (2020)
+// Revised by hamzazmah (https://github.com/hamzazmah/RubiksCubeUnity-Tutorial) (2020)
 
 using System;
 

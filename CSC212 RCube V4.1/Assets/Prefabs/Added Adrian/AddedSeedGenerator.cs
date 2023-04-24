@@ -1,5 +1,5 @@
 // Copyright 2023
-// Adrian Damik, Elijah Gray, & Aryan Pothanaboyina
+// Created by Adrian Damik
 
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +9,9 @@ using UnityEngine.UI;
 using System.IO;
 using System.Text;
 
+/// <summary>
+/// Generates a move list based on a seed string and amount of moves to shuffle the cube. This was used for automated testing, and manual testing.
+/// </summary>
 public class AddedSeedGenerator : MonoBehaviour
 {
     public static AddedSeedGenerator instance;
@@ -18,7 +21,9 @@ public class AddedSeedGenerator : MonoBehaviour
     public InputField myInputFieldSeed;
     public InputField myInputFieldSteps;
 
-    // retrieves input from InputFields for seed & move steps, sends to hash function to generate move list, then sends move list to automate
+    /// <summary>
+    /// Retrieves input from InputFields for seed and numMoves, sends them to the hash function to generate a move list, then sends the move list to automate.
+    /// </summary>
     public void ReadInput() { 
         seedInput = myInputFieldSeed.text;
         stepInput = int.Parse(myInputFieldSteps.text);
@@ -27,6 +32,12 @@ public class AddedSeedGenerator : MonoBehaviour
         Automate.moveList = hash(seedInput, stepInput);
     }
 
+    /// <summary>
+    /// Converts a string and integer into a set of moves that can be used to shuffle the cube. The same string and integer will generate the same moves every time.
+    /// </summary>
+    /// <param name="seed"> The string used to create the seed. </param>
+    /// <param name="numMoves"> The amount of moves the function will generate using the seed (Default is 15).</param>
+    /// <returns> Returns a list of moves that can be sent to automate to run the shuffle with. </returns>
     public List<string> hash(string seed, int numMoves = 15) {
         List<string> allMoves = new List<string>() // rubik's cube move list
         {
@@ -58,6 +69,11 @@ public class AddedSeedGenerator : MonoBehaviour
         return shuffle;
     }
 
+
+    /// <summary>
+    /// Reads in a txt file that exists inside the Unity project, and converts it into a queue that can be understood by the hash function. 
+    /// </summary>
+    /// <returns> Returns the formated queue to be used with the hash function. </returns>
     public Queue<System.Tuple<string, int>> ReadSeeds() {
         string listOfSeeds = Application.dataPath + "//Prefabs//Added Adrian//seeds.txt";
         Queue<System.Tuple<string, int>> my_queue = new Queue<System.Tuple<string, int>>(); // create new queue with list of seeds
