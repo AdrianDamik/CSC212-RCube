@@ -11,20 +11,35 @@ using UnityEngine.Assertions;
 
 using seedHash = System.Collections.Generic.Queue<System.Tuple<string, int>>; // adrian 4/4/23
 
-// test base created by Elijah Gray
+/// <summary>
+/// blackbox test base & data collection system created by Elijah Gray.
+/// revised by Adrian Damik for use with seed generator - Adrian
+/// this test is for the Beginner method.
+/// </summary>
 public class TestLayer : MonoBehaviour
 {
+    /// <summary>
+    /// used to grab the cube state functionality.
+    /// </summary>
     private CubeState cubeState;
+
+
     private ReadCube readCube;
+
+    /// <summary>
+    /// the solver used in this test, in this case the beginner/layer method.
+    /// </summary>
     private LayerSolver solver;
 
+
+    /// <summary>
+    /// declare the queue used for automated testing.
+    /// </summary>
     seedHash seedQueueLayer = new seedHash(); // adrian 4/4/23
 
-    //SolveTwoPhase Method_Solver;
-
-    //GameObject.find("PivotRotation");
-
-    // list of moves, copypasted from the Kociemba solver file. - Elijah Gray
+    /// <summary>
+    /// list of moves in rubik's cube notation, copypasted from the Kociemba solver file.
+    /// </summary>
     private readonly List<string> allMoves = new List<string>()
     {
         "U", "D", "L", "R", "F", "B",
@@ -32,17 +47,27 @@ public class TestLayer : MonoBehaviour
         "U'", "D'", "L'", "R'", "F'", "B'"
     };
 
+    /// <summary>
+    /// the number of cubes to solve left in a test. Initially set to the number of cubes to solve via the number of shuffles variable.
+    /// </summary>
+    int solves_left;
 
-    int solves_left; // number of cubes to solve
-    int current_step; // current instruction step  0 - > scramble,  1 -> solve,  2 -> check if solved properly.
-    int wait_frames; // how many frames should the program wait before going to the next step. Currently a solution but an ineffecient one because sometimes the rubiks cube will try to go to the next step while its still movingm causing the program
-    // to crash 
-    // - Elijah Gray
+    /// <summary>
+    /// current instruction step  0 - > scramble,  1 -> solve,  2 -> check if solved properly.
+    /// </summary>
+    int current_step;
+
+    /// <summary>
+    /// how many frames should the program wait before going to the next step.
+    /// </summary>
+    int wait_frames; 
 
     bool test; 
 
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// called at the beginning of the program to initialize the test.
+    /// </summary>
     void Start()
     {
 
@@ -57,8 +82,12 @@ public class TestLayer : MonoBehaviour
         solver = FindObjectOfType<LayerSolver>();
     }
 
-    // initates a test to solve a number of cubes as per the variable "solves_left" -Elijah Gray
-    // Update is called once per frame
+    /// <summary>
+    /// initates a test if the F3 button is pressed to solve a number of cubes as per the variable "solves_left" -Elijah Gray
+    /// the variable number_of_shuffles determiens how many shuffles should be done. The length_of_shuffles variable determines how many moves should be in each shuffle.
+    /// the variable seed determines the seed in the shuffle command's number generator.
+    /// Update is called once per frame
+    /// </summary>
     void Update()
     {
 
@@ -103,19 +132,11 @@ public class TestLayer : MonoBehaviour
 
     }
 
-    // scrambles a rubiks cube by generating a list of steps and sending it to the automate object  - Elijah Gray
-    // todo: make the scrambles smarter so they cant undo their last move.
+    /// <summary>
+    /// instead of using original scramble, this will use the seed generator and seeds txt file to generate shuffles.
+    /// </summary>
     void Scramble()
     {
-
-        // List<string> scramble_moves = new List<string>();
-        // for (int i = 0; i < 100; i++)
-        // {
-        //     int randomMove = UnityEngine.Random.Range(0, allMoves.Count);
-        //     scramble_moves.Add(allMoves[randomMove]);
-        // }
-        // Automate.moveList = scramble_moves;
-
         AddedSeedGenerator SG = new AddedSeedGenerator();
 
         Debug.Log("Test");
@@ -150,8 +171,9 @@ public class TestLayer : MonoBehaviour
     }
 
 
-    // checks the rubiks cube object and checks if it is in a solved state. If it's not, throw an error.
-    // - ELIJAH Gray
+    /// <summary>
+    /// checks the rubiks cube object to check if it is in a solved state. If the cube is not solved, throw a unity console message stating the cube was not solved. -Elijah Gray
+    /// </summary>
     void Check_Solution()
     {
 
@@ -165,8 +187,11 @@ public class TestLayer : MonoBehaviour
     }
 
 
-    // copypasted from the original twophase solver. Converts a string input into a list of string objects representing the various moves.
-    // - Elijah GRay
+    /// <summary>
+    /// copypasted from the original twophase solver. Converts a string input into a list of string objects representing the various moves.
+    /// </summary>
+    /// <param name="solution"> string input. </param>
+    /// <returns> returns list of string objects for moves. </returns>
     List<string> StringToList(string solution)
     {
         List<string> solutionList = new List<string>(solution.Split(new string[] { " " }, System.StringSplitOptions.RemoveEmptyEntries));
@@ -175,8 +200,9 @@ public class TestLayer : MonoBehaviour
 
 
 
-    // handles the process of going step to step for the tests. The first step is to scramble the cube. The second step is to generate a list of moves to solve the cube. The third step is to check if the cube is properly solved
-    // - Elijah Gray
+    /// <summary>
+    /// handles the process of going step to step for the tests. The first step is to scramble the cube. The second step is to generate a list of moves to solve the cube. The third step is to check if the cube is properly solved. - Elijah Gray
+    /// </summary>
     void test_step ()
     {
 

@@ -10,7 +10,7 @@ using UnityEngine.Assertions;
 /// blackbox test base & data collection system created by Elijah Gray. Added more automation features & file saving/loading in v4 - Elijah Gray
 /// this test is for the Kociemba method.
 /// </summary>
-public class tesKociemba4 : MonoBehaviour
+public class testKociemba4 : MonoBehaviour
 {
    
     /// <summary>
@@ -125,7 +125,7 @@ public class tesKociemba4 : MonoBehaviour
     }
 
     /// <summary>
-    /// initates a test if the L button is pressed to solve a number of cubes as per the variable "solves_left" -Elijah Gray
+    /// initates a test if the F4 button is pressed to solve a number of cubes as per the variable "solves_left" -Elijah Gray
     /// the variable number_of_shuffles determiens how many shuffles should be done. The length_of_shuffles variable determines how many moves should be in each shuffle.
     /// the variable seed determines the seed in the shuffle command's number generator.
     /// Update is called once per frame
@@ -139,7 +139,7 @@ public class tesKociemba4 : MonoBehaviour
             return;
         }
 
-        if ((UnityEngine.Input.GetKeyUp(KeyCode.L)))
+        if ((UnityEngine.Input.GetKeyUp(KeyCode.F4)))
         {
             test = true;
             //solves_left = 1000; // how many cubes should be solved for the test.

@@ -12,22 +12,38 @@ using UnityEngine.Assertions;
 
 using seedHash = System.Collections.Generic.Queue<System.Tuple<string, int>>; // adrian 4/4/23
 
-// test base created by Elijah Gray
+/// <summary>
+/// blackbox test base & data collection system created by Elijah Gray.
+/// revised by Adrian Damik for use with seed generator - Adrian
+/// this test is for the Kociemba method.
+/// </summary>
 public class TestKociemba : MonoBehaviour
 {
+    /// <summary>
+    /// used to grab the cube state functionality.
+    /// </summary>
     private CubeState cubeState;
+
+
     private ReadCube readCube;
+
+    /// <summary>
+    /// the solver used in this test, in this case the Kociemba method.
+    /// </summary>
     private SolveTwoPhase solver;
+
+
     string static_test = "17 13 1 11 5 0 9 11 11 9 17 14 0 11 4 15 17 14 8 10 5 15 16 6 6 16 3 5 2 12 15 9 8 3 6 4 3 9 4 7 1 2 10 15 0 2 8 6 13 10 5 6 8 8 17 2 8 10 5 2 9 5 17 7 16 15 2 8 3 9 5 16 17 2 4 8 14 5 12 10 16 9 0 11 16 0 0 0 13 11 17 14 9 15 4 8 9 14 4 4";
     List<string> static_list;
 
+    /// <summary>
+    /// declare the queue used for automated testing.
+    /// </summary>
     seedHash seedQueueKociemba = new seedHash(); // adrian 4/4/23
 
-    //SolveTwoPhase Method_Solver;
-
-    //GameObject.find("PivotRotation");
-
-    // list of moves, copypasted from the Kociemba solver file. - Elijah Gray
+    /// <summary>
+    /// list of moves in rubik's cube notation, copypasted from the Kociemba solver file.
+    /// </summary>
     private readonly List<string> allMoves = new List<string>()
     {
         "U", "D", "L", "R", "F", "B",
@@ -35,16 +51,26 @@ public class TestKociemba : MonoBehaviour
         "U'", "D'", "L'", "R'", "F'", "B'"
     };
 
+    /// <summary>
+    /// the number of cubes to solve left in a test. Initially set to the number of cubes to solve via the number of shuffles variable.
+    /// </summary>
+    int solves_left;
 
-    int solves_left; // number of cubes to solve
-    int current_step; // current instruction step  0 - > scramble,  1 -> solve,  2 -> check if solved properly.
-    int wait_frames; // how many frames should the program wait before going to the next step. Currently a solution but an ineffecient one because sometimes the rubiks cube will try to go to the next step while its still movingm causing the program
-    // to crash 
-    // - Elijah Gray
+    /// <summary>
+    /// current instruction step  0 - > scramble,  1 -> solve,  2 -> check if solved properly.
+    /// </summary>
+    int current_step; 
 
-    bool test; //boolean to determine whether a test should happen - Elijah Gray, if true the program will begin a test process.
+    /// <summary>
+    /// how many frames should the program wait before going to the next step.
+    /// </summary>
+    int wait_frames; 
 
-    // Start is called before the first frame update
+    bool test;
+
+    /// <summary>
+    /// called at the beginning of the program to initialize the test.
+    /// </summary>
     void Start()
     {
         AddedSeedGenerator SG = new AddedSeedGenerator();
@@ -58,8 +84,12 @@ public class TestKociemba : MonoBehaviour
         static_list = StringToLis2(static_test);
     }
 
-    // initates a test to solve a number of cubes as per the variable "solves_left" -Elijah Gray
-    // Update is called once per frame
+    /// <summary>
+    /// initates a test if the F1 button is pressed to solve a number of cubes as per the variable "solves_left" -Elijah Gray
+    /// the variable number_of_shuffles determiens how many shuffles should be done. The length_of_shuffles variable determines how many moves should be in each shuffle.
+    /// the variable seed determines the seed in the shuffle command's number generator.
+    /// Update is called once per frame
+    /// </summary>
     void Update()
     {
         if(CubeState.autoRotating)
@@ -108,23 +138,11 @@ public class TestKociemba : MonoBehaviour
 
     }
 
-    // scrambles a rubiks cube by generating a list of steps and sending it to the automate object  - Elijah Gray
-    // todo: make the scrambles smarter so they cant undo their last move.
+    /// <summary>
+    /// instead of using original scramble, this will use the seed generator and seeds txt file to generate shuffles.
+    /// </summary>
     void Scramble()
     {
-        // string test = "";
-        // List<string> scramble_moves = new List<string>();
-        // for (int i = 0; i < 100; i++)
-        // {
-        //     int randomMove = UnityEngine.Random.Range(0, allMoves.Count);
-        //     scramble_moves.Add(allMoves[randomMove]);
-        //     test += allMoves[randomMove].ToString();
-        //     test += " ";
-        // }
-        // Debug.Log(test); // outpuuts scramble used
-
-        //Automate.moveList = static_list;
-
         AddedSeedGenerator SG = new AddedSeedGenerator();
 
         if (seedQueueKociemba.TryPeek(out System.Tuple<string, int> pair))
@@ -136,28 +154,9 @@ public class TestKociemba : MonoBehaviour
         }
     }
 
-    // a debug function to check a specific scramble to determine if it can or cannot be properly solved.
-    // was used to determine an issue with our program wasn't an error in the solving itself but how the animations
-    // for the rubix cubes were being executed.
-    // - Elijah Gray
-    void Do_Specific_Scramble()
-    {
-        //string test = "D' B' F U F' R R' B U' B2 R2 R' D B2 L' B D' L' R R2 F' R' R' R R2 F D L L2 D2 U B R' F2 B2 U' L2 B' D' D2 U' D F F U L2 B' U U2 R U F B' F2 R B D2 L' U2 F R' L2 R2 B2 D R B2 D2 F2 F B2 L R' R2 D2 F' U' U' D F2 R' F F' B' U' L B' D' L2 R F' R R' L' D2 U' D R2 D' B'";
-        //string test = "L' F' F B D F' F B U2 D2 R R' D2 F2 L2 U2 L' R' D2 R L U' U' B2 R' D2 B F' D' F2 L2 U2 U' U' D2 R D2 F U D D' U2 F' L' D' R D' U2 R' U L F L' F2 D U R2 F' D D' D2 U D F U2 F D B F B' R L' R2 B' F2 F2 D U D' D2 R' B D2 L R' D' L' F2 B2 F B2 F B2 D' B' L2 L2 U' F' D' ";
-
-        // cube_state = LLRBUFBLFLRURRFURRDUUDFBBURLFBDDDDDFBURULLFFDFBULBRDBL
-        // shuffle = "D2 U2 F' R2 U' U' R2 F' U2 B' D F' D B2 D' D2 U' B2 R U' R L2 U R2 R D F2 U U D' F2 D2 D B2 L B U B2 D2 D' U' L2 D2 U2 U L2 R' F' L2 U' F2 U D' U' R2 B R D2 B' U' F' B' F2 D' R2 L' B R2 B2 U D B L2 F2 R2 F L D' L' F2 R2 L' U2 R2 L' D' U' R F' B B2 R R2 U2 D' U F U2 U' L "
-        string test = "D2 U2 F' R2 U' U' R2 F' U2 B' D F' D B2 D' D2 U' B2 R U' R L2 U R2 R D F2 U U D' F2 D2 D B2 L B U B2 D2 D' U' L2 D2 U2 U L2 R' F' L2 U' F2 U D' U' R2 B R D2 B' U' F' B' F2 D' R2 L' B R2 B2 U D B L2 F2 R2 F L D' L' F2 R2 L' U2 R2 L' D' U' R F' B B2 R R2 U2 D' U F U2 U' L ";
-
-        // Solution is: F2 D R' B' D2 L F' L F2 U F' D R2 U2 R2 D F2 B2 D' F2 
-        //List<string> scramble = StringToList(test);
-        Automate.moveList = StringToList(test);
-
-
-    }
-
-    // checks the rubiks cube object and checks if it is in a solved state. If it's not, throw an error.
-    // - ELIJAH Gray
+    /// <summary>
+    /// checks the rubiks cube object to check if it is in a solved state. If the cube is not solved, throw a unity console message stating the cube was not solved. -Elijah Gray
+    /// </summary>
     void Check_Solution()
     {
 
@@ -174,15 +173,10 @@ public class TestKociemba : MonoBehaviour
     }
 
     /// <summary>
-    /// 10533139131712141016126441297111512111615131216117015115011141261131481815177120166617141717161321711177186168871313101031241541011110114161390144391751
-    /// // 17 13 1 11 5 0 9 11 11 9 17 14 0 11 4 15 17 14 8 10 5 15 16 6 6 16 3 5 2 12 15 9 8 3 6 4 3 9 4 7 1 2 10 15 0 2 8 6 13 10 5 6 8 8 17 2 8 10 5 2 9 5 17 7 16 15 2 8 3 9 5 16 17 2 4 8 14 5 12 10 16 9 0 11 16 0 0 0 13 11 17 14 9 15 4 8 9 14 4 4 
+    /// copypasted from the original twophase solver. Converts a string input into a list of string objects representing the various moves.
     /// </summary>
-    /// <param name="solution"></param>
-    /// <returns></returns>
-
-
-    // copypasted from the original twophase solver. Converts a string input into a list of string objects representing the various moves.
-    // - Elijah GRay
+    /// <param name="solution"> string input. </param>
+    /// <returns> returns list of string objects for moves. </returns>
     List<string> StringToList(string solution)
     {
         List<string> solutionList = new List<string>(solution.Split(new string[] { " " }, System.StringSplitOptions.RemoveEmptyEntries));
@@ -201,14 +195,9 @@ public class TestKociemba : MonoBehaviour
         return solutionList;
     }
 
-
-    // CASES TO EXAMINE:
-    // 11 7 8 8 17 8 2 11 8 12 1 15 2 8 13 2 9 7 15 15 16 2 17 14 14 5 1 5 4 8 9 12 10 1 2 11 5 17 9 10 15 15 12 3 3 14 17 2 14 7 13 1 4 0 13 8 7 7 16 9 0 15 8 5 15 9 9 15 12 1 9 8 11 2 3 1 9 8 0 6 12 14 9 3 4 14 10 11 14 9 2 17 15 6 5 5 14 6 0 1 
-
-
-
-    // handles the process of going step to step for the tests. The first step is to scramble the cube. The second step is to generate a list of moves to solve the cube. The third step is to check if the cube is properly solved
-    // - Elijah Gray
+    /// <summary>
+    /// handles the process of going step to step for the tests. The first step is to scramble the cube. The second step is to generate a list of moves to solve the cube. The third step is to check if the cube is properly solved. - Elijah Gray
+    /// </summary>
     void test_step ()
     {
 
