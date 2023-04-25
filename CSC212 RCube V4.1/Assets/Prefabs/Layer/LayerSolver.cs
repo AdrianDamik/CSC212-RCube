@@ -1,5 +1,7 @@
-// Created by Uzi Granot (https://www.codeproject.com/Articles/1199528/Rubik-s-Cube-for-Beginners-Version-2-0-Csharp-Appl) (2022)
-// Revised by Elijah Gray & Adrian Damik (2023)
+// Created by Elijah Gray (2023)
+// Revised by Adrian Damik (2023)
+// Uses original work from: 
+// Uzi Granot (https://www.codeproject.com/Articles/1199528/Rubik-s-Cube-for-Beginners-Version-2-0-Csharp-Appl) (2022)
 
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,6 @@
-// Created by divinsmathew (https://github.com/divinsmathew/CubeXdotNet-Rubiks-Cube-Solver) (2021)
-// Revised by Elijah Gray & Adrian Damik (2023)
+// Created by Elijah Gray (2023)
+// Revised by Adrian Damik (2023)
+// Uses original work from divinsmathew (https://github.com/divinsmathew/CubeXdotNet-Rubiks-Cube-Solver) (2021)
 
 using CubeXdotNET;
 using System.Collections.Generic;
