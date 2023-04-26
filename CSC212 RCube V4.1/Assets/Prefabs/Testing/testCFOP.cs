@@ -24,8 +24,6 @@ public class testCFOP : MonoBehaviour
     /// </summary>
     private CubeState cubeState;
 
-    private ReadCube readCube;
-
     /// <summary>
     /// the solver used in this test, in this case the CFOP method.
     /// </summary>
@@ -61,8 +59,10 @@ public class testCFOP : MonoBehaviour
     /// </summary>
     int wait_frames;
 
+    /// <summary>
+    /// boolean to determine whether a test should occur. Set to true when an test is initiated by a button press.
+    /// </summary>
     bool test; 
-
 
     /// <summary>
     /// called at the beginning of the program to initialize the test.
@@ -76,7 +76,6 @@ public class testCFOP : MonoBehaviour
         wait_frames = 0;
 
         cubeState = FindObjectOfType<CubeState>();
-        readCube = FindObjectOfType<ReadCube>();
         solver = FindObjectOfType<CFOPSolver>();
     }
 
@@ -99,7 +98,6 @@ public class testCFOP : MonoBehaviour
         {
             test = true;
             solves_left = 1000; // how many cubes should be solved for the test.
-            Time.timeScale = 20;
         }
 
 
@@ -184,14 +182,13 @@ public class testCFOP : MonoBehaviour
         {
 
             cubeState = FindObjectOfType<CubeState>();
-            readCube = FindObjectOfType<ReadCube>();
 
             Debug.Log("Cubes left:" + solves_left + "and current step is: " + current_step);
             switch (current_step)
             {
                 case 0:
                     Debug.Log("1st phase:");
-                    wait_frames = 10; // * Convert.ToInt32(Time.timeScale);
+                    wait_frames = 10;
                     //bad_Wait_function();
                     Scramble();
                     ++current_step;
@@ -199,17 +196,15 @@ public class testCFOP : MonoBehaviour
 
                 case 1:
                     Debug.Log("2nd phase:");
-                    wait_frames = 10; // * Convert.ToInt32(Time.timeScale);
-                    //bad_Wait_function();
+                    wait_frames = 10; 
                     solver.Solver2();
                     ++current_step;
                     break;
 
                 case 2:
-                    wait_frames = 10; // * Convert.ToInt32(Time.timeScale);
+                    wait_frames = 10; 
                     Debug.Log("3rd phase @ cube_solve: " + solves_left);
                     --solves_left;
-                    //bad_Wait_function();
                     Check_Solution();
                     current_step = 0;
                     break;

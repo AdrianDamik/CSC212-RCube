@@ -23,14 +23,10 @@ public class TestLayer : MonoBehaviour
     /// </summary>
     private CubeState cubeState;
 
-
-    private ReadCube readCube;
-
     /// <summary>
     /// the solver used in this test, in this case the beginner/layer method.
     /// </summary>
     private LayerSolver solver;
-
 
     /// <summary>
     /// declare the queue used for automated testing.
@@ -62,8 +58,10 @@ public class TestLayer : MonoBehaviour
     /// </summary>
     int wait_frames; 
 
+    /// <summary>
+    /// boolean to determine whether a test should occur. Set to true when an test is initiated by a button press.
+    /// </summary>
     bool test; 
-
 
     /// <summary>
     /// called at the beginning of the program to initialize the test.
@@ -78,7 +76,6 @@ public class TestLayer : MonoBehaviour
         wait_frames = 0;
 
         cubeState = FindObjectOfType<CubeState>();
-        readCube = FindObjectOfType<ReadCube>();
         solver = FindObjectOfType<LayerSolver>();
     }
 
@@ -102,7 +99,6 @@ public class TestLayer : MonoBehaviour
             test = true;
             solves_left = 1000; // how many cubes should be solved for the test.
             Debug.Log("layer test initiated");
-            Time.timeScale = 100;
         }
 
 
@@ -139,7 +135,6 @@ public class TestLayer : MonoBehaviour
     {
         AddedSeedGenerator SG = new AddedSeedGenerator();
 
-        Debug.Log("Test");
         if (seedQueueLayer.TryPeek(out System.Tuple<string, int> pair)) // Added by Adrian 4/4/23
         {
             pair = seedQueueLayer.Dequeue();
@@ -149,27 +144,6 @@ public class TestLayer : MonoBehaviour
         }
 
     }
-
-    // solves the rubiks cube the same way the Koceibma twophase solver does for the solve() button.
-    // - Elijah Gray
-    void Solve()
-    {
-        string moveString = cubeState.GetStateString();
-
-        Debug.Log("Kociemba solver string: " + moveString);
-
-        string info = "";
-
-        string solution = Search.solution(moveString, out info);
-
-        //Convert the Solved Moves from a string to a list
-        List<string> solutionList = StringToList(solution);
-
-        //Automate the List
-        Automate.moveList = solutionList;
-
-    }
-
 
     /// <summary>
     /// checks the rubiks cube object to check if it is in a solved state. If the cube is not solved, throw a unity console message stating the cube was not solved. -Elijah Gray
@@ -210,33 +184,28 @@ public class TestLayer : MonoBehaviour
         {
 
             cubeState = FindObjectOfType<CubeState>();
-            readCube = FindObjectOfType<ReadCube>();
 
             Debug.Log("Cubes left:" + solves_left + "and current step is: " + current_step);
             switch (current_step)
             {
                 case 0:
                     Debug.Log("1st phase:");
-                    wait_frames = 10; // 240 * Convert.ToInt32(Time.timeScale);
-                    //bad_Wait_function();
+                    wait_frames = 10;
                     Scramble();
                     ++current_step;
                     break;
 
                 case 1:
                     Debug.Log("2nd phase:");
-                    wait_frames = 10; // * Convert.ToInt32(Time.timeScale);
-                    //bad_Wait_function();
-                    //Solve();
+                    wait_frames = 10; 
                     solver.Solver3();
                     ++current_step;
                     break;
 
                 case 2:
-                    wait_frames = 10; // * Convert.ToInt32(Time.timeScale);
+                    wait_frames = 10; 
                     Debug.Log("3rd phase @ cube_solve: " + solves_left);
                     --solves_left;
-                    //bad_Wait_function();
                     Check_Solution();
                     current_step = 0;
                     break;
@@ -251,11 +220,6 @@ public class TestLayer : MonoBehaviour
         
 
     }
-
-
-
-
-
 
 
 

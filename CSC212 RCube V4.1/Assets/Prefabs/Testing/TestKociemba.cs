@@ -24,17 +24,10 @@ public class TestKociemba : MonoBehaviour
     /// </summary>
     private CubeState cubeState;
 
-
-    private ReadCube readCube;
-
     /// <summary>
     /// the solver used in this test, in this case the Kociemba method.
     /// </summary>
     private SolveTwoPhase solver;
-
-
-    string static_test = "17 13 1 11 5 0 9 11 11 9 17 14 0 11 4 15 17 14 8 10 5 15 16 6 6 16 3 5 2 12 15 9 8 3 6 4 3 9 4 7 1 2 10 15 0 2 8 6 13 10 5 6 8 8 17 2 8 10 5 2 9 5 17 7 16 15 2 8 3 9 5 16 17 2 4 8 14 5 12 10 16 9 0 11 16 0 0 0 13 11 17 14 9 15 4 8 9 14 4 4";
-    List<string> static_list;
 
     /// <summary>
     /// declare the queue used for automated testing.
@@ -66,6 +59,9 @@ public class TestKociemba : MonoBehaviour
     /// </summary>
     int wait_frames; 
 
+    /// <summary>
+    /// boolean to determine whether a test should occur. Set to true when an test is initiated by a button press.
+    /// </summary>
     bool test;
 
     /// <summary>
@@ -79,9 +75,7 @@ public class TestKociemba : MonoBehaviour
         wait_frames = 0;
 
         cubeState = FindObjectOfType<CubeState>();
-        readCube = FindObjectOfType<ReadCube>();
         solver = FindObjectOfType<SolveTwoPhase>();
-        static_list = StringToLis2(static_test);
     }
 
     /// <summary>
@@ -108,7 +102,6 @@ public class TestKociemba : MonoBehaviour
         {
             test = true;
             solves_left = 100; // how many cubes should be solved for the test.
-            //Time.timeScale = 20;
         }
 
 
@@ -180,18 +173,6 @@ public class TestKociemba : MonoBehaviour
     List<string> StringToList(string solution)
     {
         List<string> solutionList = new List<string>(solution.Split(new string[] { " " }, System.StringSplitOptions.RemoveEmptyEntries));
-        return solutionList;
-    }
-
-    List<string> StringToLis2(string solution)
-    {
-        List<string> solutionList = new List<string>();
-
-        for (int i = 0; i < solution.Length; i++)
-        {
-            solutionList.Add(solution[i].ToString());
-        }
-
         return solutionList;
     }
 
