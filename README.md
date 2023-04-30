@@ -23,9 +23,8 @@ The Layer method utilized in this project was integrated from a project created 
 
 ___
 
-**Installation for Windows:**
 
-**UNITY:**
+**Unity installation for windows:**
 1) Install Unity Hub via the Unity website (https://unity.com/download).
 
 2) When Unity Hub has finished installation, open it. Unity hub will prompt you to log into a Unity account. Either sign into an existing account, or create a new one.
@@ -45,7 +44,8 @@ ___
 
 ___
 
-**VISUAL STUDIO CODE:**
+
+**Visual Studio Code installation for windows:**
 
 1) Install Visual Studio Code via the Visual Studio Website (https://code.visualstudio.com/download).
 
