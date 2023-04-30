@@ -32,7 +32,11 @@ UNITY:
 
 5) A prompt to install Unity Editor Version 2021.3.18f1 will appear. Select the version labeled "missing version" from the options, and install. Uncheck microsof visual studio community 2019 from the Dev tools option, and proceed with install.
 
-6) After installation of Editor is complete, open the project file in Unity Hub. 
+6) After installation of Editor is complete, open the project file in Unity Hub.
+
+7) The initial scene for the project will be blank. To open the correct scene, click File > Open scene.
+
+8) In the file explorer window that opens, navigate to <your installation location>\CSC212 project\CSC212 RCube V4.1\Assets\Scenes, and select the scene named "SampleScene".
 
 VISUAL STUDIO CODE:
 1) Install Visual Studio Code via the Visual Studio Website (https://code.visualstudio.com/download).
