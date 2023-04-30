@@ -44,3 +44,5 @@ VISUAL STUDIO CODE:
 
 2) After installation, add the following extension from the Marketplace in Visual Studio Code:
    C# v1.25.4 (or newer) by Microsoft
+
+DONE! The visual studio code half of the project should be set up at this point.
