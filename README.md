@@ -19,6 +19,7 @@ The Layer method utilized in this project was integrated from a project created 
 An executable for this project is included in the "RCube Simulator" folder. 
 
 Installation for Windows:
+
 UNITY:
 1) Install Unity Hub via the Unity website (https://unity.com/download).
 
@@ -38,6 +39,7 @@ UNITY:
 DONE! The Unity half of the project should be set up at this point.
 
 VISUAL STUDIO CODE:
+
 1) Install Visual Studio Code via the Visual Studio Website (https://code.visualstudio.com/download).
 
 2) After installation, add the following extension from the Marketplace in Visual Studio Code:
