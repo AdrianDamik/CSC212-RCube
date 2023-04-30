@@ -44,7 +44,7 @@ UNITY:
 
 DONE! The Unity half of the project should be set up at this point.
 
-___________________________________________________________________________
+_
 
 VISUAL STUDIO CODE:
 
