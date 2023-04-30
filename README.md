@@ -1,5 +1,5 @@
 # CSC212-RCube
-Rubik's Cube Simulation
+**Rubik's Cube Simulation**
 
 Project made in collaboration by Elijah Gray, Adrian Damik, & Aryan Pothanaboyina.
 
@@ -7,13 +7,13 @@ This program is a Rubik's cube solver visualization w/ three Rubik’s cube solv
 
 This program was utilized in a study comparing the three different algorithm implementations in a comparison study. One of our expectations was that the Kociemba algorithm would provide the shortest solutions, followed by the C.F.O.P method, and then the Beginner method. This expectation was met.
 
-**An executable for this project is included in the "RCube Simulator" folder**
+***An executable for this project is included in the "RCube Simulator" folder***
 
 
-___________________________________________________________________________
+___
 
 
-Credits: 
+**Credits:** 
 
 The visualization developed for this project was originally created by the github user Megalomatt (https://github.com/Megalomatt/unity-rcube). We were originally following his tutorial (https://www.youtube.com/watch?v=JN9vx0veZ-c); however we first found this user’s implementation of the tutorial from the user Hamzazmah (https://github.com/hamzazmah/RubiksCubeUnity-Tutorial). We built off this project and gradually used more code from the original project after finding the original implementation. This project also included an c# translation of the Kociemba algorithm translated by the original visualization creator.
 
@@ -21,12 +21,11 @@ The C.F.O.P method utilized in this project was integrated from a project create
 
 The Layer method utilized in this project was integrated from a project created by Uzi Granot from codeproject.org at: https://www.codeproject.com/Articles/1199528/Rubik-s-Cube-for-Beginners-Version-2-0-Csharp-Appl
 
-___________________________________________________________________________
+___
 
+**Installation for Windows:**
 
-Installation for Windows:
-
-UNITY:
+**UNITY:**
 1) Install Unity Hub via the Unity website (https://unity.com/download).
 
 2) When Unity Hub has finished installation, open it. Unity hub will prompt you to log into a Unity account. Either sign into an existing account, or create a new one.
@@ -42,15 +41,15 @@ UNITY:
 
 7) The initial scene for the project will be blank. To open the correct scene, click File > Open scene. In the file explorer window that opens, navigate to <your installation location>\CSC212 project\CSC212 RCube V4.1\Assets\Scenes, and select the scene named "SampleScene".
 
-DONE! The Unity half of the project should be set up at this point.
+**DONE! The Unity half of the project should be set up at this point.**
 
 ___
 
-VISUAL STUDIO CODE:
+**VISUAL STUDIO CODE:**
 
 1) Install Visual Studio Code via the Visual Studio Website (https://code.visualstudio.com/download).
 
 2) After installation, add the following extension from the Marketplace in Visual Studio Code:
    C# v1.25.4 (or newer) by Microsoft
 
-DONE! The visual studio code half of the project should be set up at this point.
+**DONE! The visual studio code half of the project should be set up at this point.**
