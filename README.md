@@ -7,7 +7,7 @@ This program is a Rubik's cube solver visualization w/ three Rubik’s cube solv
 
 This program was utilized in a study comparing the three different algorithm implementations in a comparison study. One of our expectations was that the Kociemba algorithm would provide the shortest solutions, followed by the C.F.O.P method, and then the Beginner method. This expectation was met.
 
-***An executable for this project is included in the "RCube Simulator" folder*** 
+**An executable for this project is included in the "RCube Simulator" folder**
 
 
 ___________________________________________________________________________
@@ -44,7 +44,7 @@ UNITY:
 
 DONE! The Unity half of the project should be set up at this point.
 
-_
+__
 
 VISUAL STUDIO CODE:
 
