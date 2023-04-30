@@ -25,18 +25,17 @@ UNITY:
 2) When Unity Hub has finished installation, open it. Unity hub will prompt you to log into a Unity account. Either sign into an existing account, or create a new one.
 
 3) After signing into the Unity Hub, the Unity editor installation prompt will appear. SKIP THIS FOR NOW. 
-   Install the Editor Version 2021.3.18f1 of Unity Editor.
 
-4) After Unity HUb fully opens, click the "projects" tab, then click the "open" button at the top right corner of the Unity Hub window. This will open a file explorer window. Navigate to the location where the RCube simulation is installed, and navigate to the following folder: 
+4) After Unity Hub fully opens, click the "projects" tab, then click the "open" button at the top right corner of the Unity Hub window. This will open a file explorer window. Navigate to the location where the RCube simulation is installed, and navigate to the following folder: 
    <your installation location>\CSC212-RCube-main\CSC212-RCube-main\CSC212 RCube V4.1
 
-5) A prompt to install Unity Editor Version 2021.3.18f1 will appear. Select the version labeled "missing version" from the options, and install. Uncheck microsof visual studio community 2019 from the Dev tools option, and proceed with install.
+5) A prompt to install Unity Editor Version 2021.3.18f1 will appear. Select the version labeled "missing version" from the options, and install. Uncheck "microsoft visual studio community 2019" from the Dev tools option, and proceed with install.
 
 6) After installation of Editor is complete, open the project file in Unity Hub.
 
-7) The initial scene for the project will be blank. To open the correct scene, click File > Open scene.
+7) The initial scene for the project will be blank. To open the correct scene, click File > Open scene. In the file explorer window that opens, navigate to <your installation location>\CSC212 project\CSC212 RCube V4.1\Assets\Scenes, and select the scene named "SampleScene".
 
-8) In the file explorer window that opens, navigate to <your installation location>\CSC212 project\CSC212 RCube V4.1\Assets\Scenes, and select the scene named "SampleScene".
+DONE! The Unity half of the project should be set up at this point.
 
 VISUAL STUDIO CODE:
 1) Install Visual Studio Code via the Visual Studio Website (https://code.visualstudio.com/download).
