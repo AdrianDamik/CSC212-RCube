@@ -7,7 +7,7 @@ This program is a Rubik's cube solver visualization w/ three Rubik’s cube solv
 
 This program was utilized in a study comparing the three different algorithm implementations in a comparison study. One of our expectations was that the Kociemba algorithm would provide the shortest solutions, followed by the C.F.O.P method, and then the Beginner method. This expectation was met.
 
-***An executable for this project is included in the "RCube Simulator" folder***
+***An executable for this project (named "My Project.exe") is included in the "RCube Simulator" folder***
 
 
 ___
@@ -20,6 +20,31 @@ The visualization developed for this project was originally created by the githu
 The C.F.O.P method utilized in this project was integrated from a project created by the user Divinsmathew: https://github.com/divinsmathew/CubeXdotNet-Rubiks-Cube-Solver.
 
 The Layer method utilized in this project was integrated from a project created by Uzi Granot from codeproject.org at: https://www.codeproject.com/Articles/1199528/Rubik-s-Cube-for-Beginners-Version-2-0-Csharp-Appl
+
+
+___
+
+
+**EXE Controls:**
+
+Before shuffling the cube, a number of moves must be entered into the "Enter No of Shuffles..." text field. The minimum value entered should be 11 for accuracy.
+
+After the cube is shuffled, select any of the three solvers (Kociemba, CFOP, or Layer) to begin solving the cube.
+
+To enter a shuffle seed, enter a seed into the "Enter seed..." text field, then enter the number of moves into the "Enter steps..." field and press Enter key.
+
+Speed controls are located at the lower right corner of the screen. Move the slider handle to the left to slow down, and to the right to speed up (default value for "real time" is 1).
+
+Press the Pause button to pause the model, and press the Pause button again to resume. 
+
+Press the Debug button to enable debug speed, and press the Debug button again to disable.
+
+Click and drag on the cube model with Mouse Left Click to rotate the layers of the model selected.
+
+Click and drag around the cube model with Mouse Right Click to pan around the model.
+
+Press the Esc key to exit from the EXE.
+
 
 ___
 
@@ -42,6 +67,7 @@ ___
 
 **DONE! The Unity half of the project should be set up at this point.**
 
+
 ___
 
 
@@ -50,6 +76,7 @@ ___
 1) Install Visual Studio Code via the Visual Studio Website (https://code.visualstudio.com/download).
 
 2) After installation, add the following extension from the Marketplace in Visual Studio Code:
+   
    C# v1.25.4 (or newer) by Microsoft
 
 **DONE! The visual studio code half of the project should be set up at this point.**
